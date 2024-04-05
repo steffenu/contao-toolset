@@ -1,0 +1,9 @@
+# This file has been auto-generated during installation
+parameters:
+  database_host: mysql
+  database_port: 3306
+  database_user: root
+  database_password: opwer384
+  database_name: lafe_db
+  database_version: 5.7.39
+  secret: 6b16a92ca979566bc312a4a36cdbbd7ebd734b15d1771fe9c01451454ba7c881

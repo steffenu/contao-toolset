@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Local Brewery Five';
+  font-style: normal;
+  font-display: fallback;
+  src: url('../../tpl/fonts/LocalBreweryFive.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'WorkSans-Bold';
+  font-style: normal;
+  font-display: fallback;
+  src: url('../../tpl/fonts/WorkSans-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'WorkSans-SemiBold';
+  font-style: normal;
+  font-display: fallback;
+  src: url('../../tpl/fonts/WorkSans-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'WorkSans-Medium';
+  font-style: normal;
+  font-display: fallback;
+  src: url('../../tpl/fonts/WorkSans-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'WorkSans-Regular';
+  font-style: normal;
+  font-display: fallback;
+  src: url('../../tpl/fonts/WorkSans-Regular.woff2') format('woff2');
+}
+

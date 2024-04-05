@@ -1,0 +1,144 @@
+<?php 
+
+/* 
+1. Ziehe aus der Datenbank alle Events ( Datum Event benötigt)
+2. Erstelle einen Array mit den nächsten 30 Wochen (Start Woche Datum - Ende Woche Datum)
+3. Frontend - KalennderWochen Durchschalten
+4. Frontend - Aktive KalenderWoche anzeigen
+5. Frontend - Events  in die aktiven Kalenderwochen eintragen (tag zuordnen)
+*/
+
+
+/* INTEGRATE DATA FROM TEMPLATE TO REACT COMPONENT
+<div id="react-container" data-props="{{ jsonData|json_encode|e }}"></div> // put the json into the html5 template
+
+
+const ChildComponent = () => {
+  const element = document.getElementById('react-container');
+  const jsonData = JSON.parse(element.dataset.props);  // parse the json in compoenent
+*/
+
+
+
+/* $m = new \Moment\Moment(); // current date
+$weekdayNumbers = [1, 2, 3, 4, 5, 6, 7];
+
+$weeks = [];
+
+for ($i = 0; $i < 50; $i++) {
+$startOfWeek = $m->startOf('week');
+
+$week_dates = $startOfWeek->getMomentsByWeekdays($weekdayNumbers, 1);
+
+array_unshift($week_dates, clone $startOfWeek); // push startofWeek into first position
+
+array_push($weeks ,$week_dates); // push week_dates into $week array
+
+$m->addWeeks(1);
+
+}  
+//dump($weeks[0]);
+
+// Convert the array to a JSON string
+$jsonData = json_encode($weeks); */
+//dump($jsonData);
+
+
+
+// Aktuelle Woche Start und Enddatum + KalenderWoche
+//$period = $m->getPeriod('week');
+// 1 - 7 = Mon - Sun
+
+
+ // get the next days for th
+// push the first day into the array ( for some reason it is not included via getMomentsByWeekdays)
+
+
+
+/* $m->addWeeks(1);
+$dates = $m->getMomentsByWeekdays($weekdayNumbers, 1); // get the next days for th
+dump($dates); */
+//$endOfWeek =  $startOfWeek->endOf('week');
+
+
+// Montag bis Sonntag Datum bekommen
+
+/* $montag = $startOfWeek;
+$dienstag = $startOfWeek->addDays(1);
+dump($dienstag);
+$mittwoch = $startOfWeek->addDays(2);
+$donnerstag = $startOfWeek->addDays(3);
+$freitag = $startOfWeek->addDays(4);
+$samstag = $startOfWeek->addDays(5);
+$sonntag = $startOfWeek->addDays(6);
+//dump($sonntag);
+
+$m->addWeeks(1);
+$startOfWeek = $m->startOf('week');
+$m->addDays(1);
+//dump($m);
+$m->endOf('week');
+//dump($m);
+
+// Create an array to store all the days of the week
+$daysOfWeek = [];
+
+
+// Loop through the week and add each day to the array
+for ($i = 0; $i < 7; $i++) {
+  $daysOfWeek[] = $startOfWeek->format('Y-m-d'); // Format the date as desired
+  $startOfWeek->addDays(1); // Move to the next day
+}  */
+
+
+/* 1. ALLE EVENTS ALS JSON */
+/* 2. 30 Wochen als JSON */
+
+//dump($this->events);
+//dump($this->days);
+
+?>
+
+<!-- <table class="calendar">
+<thead>
+  <tr>
+    <th colspan="2" class="head previous"><?php if ($this->prevHref): ?><a href="<?= $this->prevHref ?>" title="<?= $this->prevTitle ?>"><?= $this->prevLink ?></a><?php else: ?>&nbsp;<?php endif; ?></th>
+    <th colspan="3" class="head current"><?= $this->current ?></th>
+    <th colspan="2" class="head next"><?php if ($this->nextHref): ?><a href="<?= $this->nextHref ?>" title="<?= $this->nextTitle ?>"><?= $this->nextLink ?></a><?php else: ?>&nbsp;<?php endif; ?></th>
+  </tr>
+  <tr>
+    <?php foreach ($this->days as $day): ?>
+      <th class="label<?= $day['class'] ?>"><?= $day['name'] ?></th>
+    <?php endforeach; ?>
+  </tr>
+</thead>
+<tbody>
+<?php
+  //dump($this->weeks);
+  //dump($this->days);
+?>
+  <?php foreach ($this->weeks as $class => $week): ?>
+    <tr class="<?= $class ?>">
+      <?php foreach ($week as $day): ?>
+        <td class="<?= $day['class'] ?>">
+ 
+          <div class="header"><?= $day['label'] ?></div>
+          <?php foreach ($day['events'] as $event): ?>
+            <div class="event cal_<?= $event['parent'] ?><?= $event['class'] ?>">
+              <a href="<?= $event['href'] ?>" title="<?= $event['title'] ?> (<?php if ($event['day']): ?><?= $event['day'] ?>, <?php endif; ?><?= $event['date'] ?><?php if ($event['time']): ?> <?= $event['time']?><?php endif; ?>)"<?= $event['target'] ?>><?= $event['link'] ?></a>
+            </div>
+          <?php endforeach; ?>
+        </td>
+      <?php endforeach; ?>
+    </tr>
+  <?php endforeach; ?>
+</tbody>
+</table> -->
+
+<div id="root" data-weeks='<?= $this->weeks ?>' data-events='<?= $this->events ?>'></div>
+
+<?php 
+$GLOBALS['TL_JAVASCRIPT']['calendar_js'] = 'web/bundles/extendedcalendar/build/static/js/main.8d8c5381.js';
+$GLOBALS['TL_CSS']['calendar_css'] = 'web/bundles/extendedcalendar/build/static/css/main.4d822f2b.css';
+?>
+

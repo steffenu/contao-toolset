@@ -1,0 +1,5 @@
+<?php $GLOBALS['TL_CSS']['events_reader_css'] = 'public/bundles/extendedcalendar/css/events_reader.css'; ?>
+<?php $this->extend('block_searchable'); ?>
+<?php $this->block('content'); ?>
+<?= $this->event ?>
+<?php $this->endblock(); ?>

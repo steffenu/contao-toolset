@@ -1,0 +1,65 @@
+<?php
+use Contao\PageModel;
+global $objPage;
+//dump($objPage);
+?>
+
+
+
+<div class="navigation">
+  <div class="navigation__container container">
+    <a href="index.html">
+    {{image::files/tpl/Assets/IMAGES/nasebaeren_bildmarke.png?class=navigation__logo}}
+    </a>
+
+
+    <div class="navigation__socialwrapper">
+      {{image::files/tpl/Assets/VECTOR/facebook.svg?class=navigation__socialicon}}
+      {{image::files/tpl/Assets/VECTOR/instagram.svg?class=navigation__socialicon}}
+      {{image::files/tpl/Assets/VECTOR/linkedin.svg?class=navigation__socialicon}}
+      {{image::files/tpl/Assets/VECTOR/youtube.svg?class=navigation__socialicon}}
+    </div>
+
+
+
+
+  
+    <div class="navigation__menuwrapper">
+      <p class="navigation__menutext">MENÜ</p>
+      {{image::files/tpl/Assets/VECTOR/menu_open.svg?class=navigation__hamburger}}
+    </div>
+  </div>
+</div>
+<div class="navigation__menu_abstand"></div>
+
+
+
+<!-- <div id="navigationmodal" class="modal">
+  <div class="modal-content">
+      <div class="navigationmodal">
+        <img src="files/tpl/Logenplatz_Assets/Rendering/Renderings FeWo 01/8_cropped.jpg" alt="" class="navigationmodal__background">
+        <img src="files/tpl/Logenplatz_Assets/Backgrounds/08_paper_texture_orange.jpg" alt="" class="navigationmodal__overlay">
+          <span class="close close-navigationmodal close-modal">&times;</span>
+
+          <div class="navigationmodal__title">MENÜ</div>
+          <?php if($objPage->id == 2): ?>   
+          <div class="navigationmodal__menuitems">{{insert_module::4}}</div>
+          <div style="padding-top: 25px;" class="navigationmodal__menuitems">{{insert_module::6}}</div>
+          <?php else: ?>
+          <div class="navigationmodal__menuitems">{{insert_module::5}}</div>
+          <?php endif ?>
+          <img src="files/tpl/Logenplatz_Assets/Vector/LGP_logo_short_collection.svg" alt="" class="navigationmodal__logo">        
+     
+
+          <ul class="modalfooter__nav">
+            <li class="modalfooter__navitem">© LOGENPLATZ</li>
+            <a href="/impressum.html"><li  class="modalfooter__navitem">. Impressum</li></a>
+            <a href="/datenschutz.html"><li class="modalfooter__navitem">. Datenschutz</li></a>
+            <a href="/partner.html"><li class="modalfooter__navitem">. Partner</li></a>
+          
+          </ul>
+
+      </div>
+  </div>
+</div> -->
+

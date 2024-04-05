@@ -1,0 +1,102 @@
+<?php 
+$GLOBALS['TL_CSS']['extendednews_css'] = 'web/bundles/extendednews/css/extendednews.css';
+// Splide Slider 
+$GLOBALS['TL_JAVASCRIPT']['splideslider'] = 'files/tpl/script/splideslider/splide.min.js';
+$GLOBALS['TL_CSS']['splideslider_css'] = '/files/tpl/script/splideslider/splide.min.css';
+
+?>
+
+<div class="newssection__topshape">
+  {{image::files/tpl/Assets/VECTOR/Differenzmenge.svg}}
+</div>
+<section class="newssection">
+
+  <div class="newssection__headline">
+    <<?= $this->hl ?>>NEWSFEED</<?= $this->hl ?>>
+  </div>
+
+  <div class="newssection__wrapper container">
+    <section id="news-slider" class="splide" aria-label="Splide Basic HTML Example">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <?php if (empty($this->articles)): ?>
+          <p class="empty"><?= $this->empty ?></p>
+          <?php else: ?>
+          <?= implode('', $this->articles) ?>
+          <?= $this->pagination ?>
+          <?php endif; ?>
+        </ul>
+      </div>
+      <div class="splide__arrows">
+        <button class="splide__arrow splide__arrow--prev">
+          <img src="files/tpl/Assets/VECTOR/grey_arrow.svg" alt="">
+        </button>
+        <div class="splide__arrow--overlay"></div>
+        <button class="splide__arrow splide__arrow--next">
+          <img src="files/tpl/Assets/VECTOR/grey_arrow.svg" alt="">
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="newssection__linkwrapper">
+    <div class="newssection__icon">
+      {{image::files/tpl/Assets/VECTOR/icon_events.svg?class=newssection__icon}}
+    </div>
+  
+    <a href="" class="newssection__link">ALLE NEWS & SPIELBERICHTE</a>
+
+  </div>
+
+
+</section>
+
+
+
+<div class="newssection__roughstructure">
+  {{image::files/tpl/Assets/VECTOR/rough_structure.svg}}
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+
+
+    var splide = new Splide('#news-slider', {
+      destroy: true,
+      type: 'loop',
+      autoplay: 'pause',
+      interval: 3000,
+      speed: 2000,
+      gap: '10px',
+      perPage: 1,
+
+      cover: true,
+      pagination: false,
+      arrows: false,
+      focus: 'center',
+      autoWidth: false,
+      fixedWidth: '418px',
+      fixedHeight: '635px',
+
+
+
+      mediaQuery: 'max',
+      breakpoints: {
+        768: {
+          fixedWidth:'347px',
+          destroy: false,
+          pagination: true,
+          arrows: true,
+          perPage: 1,
+        },
+      }
+    });
+
+
+    splide.mount();
+
+  })
+</script>

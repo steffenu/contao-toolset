@@ -1,0 +1,11 @@
+<?php if ($this->elementID): ?>
+<div id="<?= $this->elementID ?>"></div>
+<?php endif ?>
+
+<section style="background:<?= $this->background_select ?>;" class="headlinesection <?= $this->class ?> sectionpadding-100-0">
+  <div  class="headline__container ">
+    <div style="<?= $this->text_align ?>;" class="headline__title container"><<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>></div>
+  </div>
+</section>
+
+

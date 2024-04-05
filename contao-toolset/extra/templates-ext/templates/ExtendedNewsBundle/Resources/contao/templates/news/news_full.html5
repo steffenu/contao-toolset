@@ -1,0 +1,179 @@
+<?php 
+// Splide Slider 
+$GLOBALS['TL_JAVASCRIPT']['splideslider'] = 'files/tpl/script/splideslider/splide.min.js';
+$GLOBALS['TL_CSS']['splideslider_css'] = '/files/tpl/script/splideslider/splide.min.css';
+
+$GLOBALS['TL_JAVASCRIPT']['jquery'] = 'files/tpl/script/jquery/jquery.js';
+$GLOBALS['TL_JAVASCRIPT']['slickslider'] = 'web/bundles/imagemanager/slick/slick.min.js';
+$GLOBALS['TL_JAVASCRIPT']['lightbox_js'] = 'files/tpl/script/lightbox/lupcom-lightbox.js';
+$GLOBALS['TL_CSS']['lightbox_css'] = 'web/bundles/imagemanager/lupcomLightbox/lupcom-lightbox-scss.scss';
+$GLOBALS['TL_CSS']['slickslider'] = 'web/bundles/imagemanager/slick/slick.css';
+
+?>
+
+
+<?php 
+$GLOBALS['TL_JAVASCRIPT']['news_fullest'] = 'web/bundles/extendednews/js/news_full.js';
+
+$GLOBALS['TL_CSS']['extendednews_css'] = 'web/bundles/extendednews/css/extendednews.css';
+?>
+
+<section class="newsdetailsection">
+  <div class="newsdetail">
+
+
+  <?php
+  \Moment\Moment::setLocale('de_DE'); 
+  $m = new \Moment\Moment($this->date, 'Europe/Berlin');
+  $m = $m->format('d. F y');
+ 
+  ?>
+    <div class="newsdetail__container container">
+    <div class="newsdetail__title">
+    <h1><?= $this->newsHeadline ?></h1>
+    </div>
+
+    <div class="newsdetail__meta">
+      <div class="newsdetail__location">
+        <strong><?= $this->location ?></strong>
+      </div>
+      <p class="newsdetail__date">
+        <?= $m ?>
+      </p>
+    </div>
+    </div>
+
+      
+
+      <div class="imageslidersection__roughstructuretop">
+        {{image::files/tpl/Assets/VECTOR/rough_structure.svg}}
+      </div>
+      <section class="imageslidersection sectionpadding-100-120 <?= $this->class ?> ">
+
+        <div class="imageslider">
+          <div class="imageslider__container container">
+
+            <section id="imageslider-slider" class="splide" aria-label="Splide Basic HTML Example">
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <?php foreach (unserialize($this->lp_image_multi_gallerie) as $item): ?>
+                  <?php $img = Contao\FilesModel::findById($item)->path; ?>
+
+                  <li class="splide__slide imageslider__item"><a
+                      href="<?= Lupcom\LazyloadBundle\Image::get($img, 1920, 1080, 'proportional') ?>"
+                      class="lightbox imageslider__box<?= $index ?>" data-rel="gallery_<?= $this->id ?>"
+                      data-lightbox="gallery">{{picture::<?= $img ?>?size=6}}</a>
+                  </li>
+                  <?php endforeach ?>
+                </ul>
+              </div>
+              <div class="splide__arrows">
+                <button class="splide__arrow splide__arrow--prev">
+                  <img src="files/tpl/Assets/VECTOR/arrow_right_black.svg" alt="">
+                </button>
+                <div class="splide__arrow--overlay"></div>
+                <button class="splide__arrow splide__arrow--next">
+                  <img src="files/tpl/Assets/VECTOR/arrow_right_black.svg" alt="">
+                </button>
+              </div>
+            </section>
+
+
+
+          </div>
+
+        </div>
+      </section>
+      <div class="imageslidersection__roughstructurebottom">
+        {{image::files/tpl/Assets/VECTOR/rough_structure.svg}}
+      </div>
+
+      <div class="newsdetail__maintext container">
+        <p>
+          Nach den Schülern der Rostocker Nasenbären nahm auch die Jugend U16 vom Inline-Skaterhockey-Verein aus der
+          Hansestadt an der Deutschen Meisterrunde 2022 im bayrischen Atting teil. Insgesamt neun Vertretungen aus
+          sieben Bundesländer bewarben sich im den Titel und den damit verbundenen Siegerpokal. Nach zwei spannenden
+          Wettkampftagen landeten die Rostocker Mädchen und Jungen im Mittelfeld. Auch wenn es in dieser Altersklasse
+          keine Medaille gab, zeigten die Nasenbären-Akteure in ihren Meisterschaftsvergleichen gute und phasenweise
+          auch sehr gute Leistungen. „Für unsere junge Mannschaft, die seit Ende Juni kein Punktspiel mehr bestreiten
+          durfte, war es das erwartet schwere Turnier. Unseren zum Teil jüngeren Mädchen und Jungen fiel es noch relativ
+          schwer, physisch mit den anderen Teams mitzuhalten. Uns gelang es trotzdem, die Leistung von Spiel zu Spiel zu
+          steigern“, so die Einschätzung von Nasenbären-Vereinschef und Trainer Christian Ciupka noch vor Ort nach dem
+          Turnier. Nur eine Ausnahme gab es, als die Nasenbären-Jugend in der Zwischenrunde die Partie gegen den HC
+          Merdingen mit 0:9 Toren zu hoch verloren. Zuvor gab es gegen die Crash Eagles Kaarst eine 1:5-Niederlage und
+          wurde gegen die Deggendorf Pflanz mit 3:2 Toren gewonnen. „Am Ende waren es am Sonntag spannende Spiele um
+          Platz 5 bis 7, in denen unser Team noch mal alles aus sich rausholte und nur knapp um ein Tor den sechsten
+          Platz verpasste“, so Christian Ciupka weiter. „Die Deutschen Meisterschaften brachten weitere Erfahrungen und
+          motivieren für die neue Saison 2023.“ Die Nasenbären spielte um Platz 5 gegen Polarstern Potsdam
+          2:2-Unentschieden und nochmals gegen Crash Eagles Kaarst nur eine 0:3. So blieb es beim siebenten Platz in der
+          Endabrechnung. Deutscher Meister wurden die Düsseldorf Rams. Bildangebot Die zumeist jüngeren Mädchen und
+          Jungen der Rostocker Nasenbären belegten bei der Deutschen Meisterschaft der Jugend U16 in der Besetzung mit
+          Trainer Christian Ciupka, Fynn Ole Hausmann, Vincent Schaumlöffel, Michal Tomkowicz, Felix Hübner, Greta
+          Puckhaber, Yan Shchebetovsky und Xaver Esins (hinten v. l.) sowie Marie Haack, Paul Otto Glock, Tom Ehlert,
+          Jesse Hübner, Mavi Klein, Lennart Bonau, und Mia Warluks (vorne v. l.) einen ordentlichen siebenten Platz.
+          Mehr war bei der starken Konkurrenz aus den anderen Bundesländern noch nicht drin.
+        </p>
+
+
+        <a href="/" onclick="window.history.go(-1); return false;" class="newsdetail__backwrapper" >
+          <div class="newsdetail__backicon">{{image::files/tpl/Assets/VECTOR/arrow_right.svg}}</div>
+          <p class="newsdetail__backtext">Zurück</p>
+        </a>
+      </div>
+
+</section>
+
+
+
+
+<!-- 
+<div class="layout_full block<?= $this->class ?>">
+
+
+  <?php if ($this->hasMetaFields): ?>
+    <p class="info"><time datetime="<?= $this->datetime ?>"><?= $this->date ?></time> <?= $this->author ?> <?= $this->commentCount ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->hasSubHeadline): ?>
+    <h2><?= $this->subHeadline ?></h2>
+  <?php endif; ?>
+
+  <?php if ($this->hasText): ?>
+    <?= $this->text ?>
+  <?php else: ?>
+    <div class="ce_text block">
+      <?php if (!$this->addBefore): ?>
+        <?= $this->teaser ?>
+      <?php endif; ?>
+
+      <?php if ($this->addImage): ?>
+        <?php $this->insert('image', $this->arrData); ?>
+      <?php endif; ?>
+
+      <?php if ($this->addBefore): ?>
+        <?= $this->teaser ?>
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->enclosure): ?>
+    <ul class="enclosure">
+      <?php foreach ($this->enclosure as $enclosure): ?>
+        <li class="download-element ext-<?= $enclosure['extension'] ?>">
+          <a href="<?= $enclosure['href'] ?>" title="<?= $enclosure['title'] ?>"><?= $enclosure['link'] ?> <span class="size">(<?= $enclosure['filesize'] ?>)</span></a>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  <?php endif; ?>
+
+</div> -->
+
+<?php
+
+$schemaOrg = $this->getSchemaOrgData();
+
+if ($this->hasText) {
+    $schemaOrg['text'] = $this->rawHtmlToPlainText($this->text);
+}
+
+$this->addSchemaOrg($schemaOrg);

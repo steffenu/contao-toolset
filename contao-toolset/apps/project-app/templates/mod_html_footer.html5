@@ -1,0 +1,62 @@
+<div class="footer">
+  <div class="footer__roughstructure">
+  {{image::files/tpl/Assets/VECTOR/rough_structure.svg}}
+  </div>
+  <div class="footer__container container">
+    <div class="footer__wrapper ">
+
+      <div class="footer__boxleft col-4">
+        <div class="footer__contentwrapper">
+        <p class="footer__boxleftheadline">
+          WIR SIND MITGLIED
+        </p>
+        <div class="footer__imagewrapper">
+        {{image::files/tpl/Assets/IMAGES/nasebaeren_bildmarke.png}}
+        {{image::files/tpl/Assets/IMAGES/nasebaeren_bildmarke.png}}
+        </div>
+ 
+
+        <a class="footer_showall">
+          <p class="footer__linktext">Alle anzeigen</p>
+          {{image::files/tpl/Assets/VECTOR/arrow_right_black.svg?class=footer__linkarrow}}
+        </a>
+      </div>
+        </div>
+
+
+      <div class="footer__boxmiddle col-4">
+        <div class="footer__boxtop">
+          <div class="footer__foryou">
+            {{insert_module::7}}
+          </div>
+          <div class="footer__aboutus">
+            {{insert_module::8}}
+          </div>
+        </div>
+
+        <div class="footer__boxsocial">
+          {{image::files/tpl/Assets/VECTOR/linkedin.svg?class=navigation__socialicon}}
+          {{image::files/tpl/Assets/VECTOR/instagram.svg?class=navigation__socialicon}}
+          {{image::files/tpl/Assets/VECTOR/facebook.svg?class=navigation__socialicon}}
+          {{image::files/tpl/Assets/VECTOR/youtube.svg?class=navigation__socialicon}}
+        </div>
+      </div>
+
+      <div class="footer__boxright col-4">
+        {{image::files/tpl/Assets/IMAGES/nasebaeren_bildmarke.png}}
+      </div>
+
+    </div>
+
+
+
+    <ul class="footer__nav">
+      <a href="/impressum.html">
+        <li class="footer__navitem"> Impressum</li>
+      </a>
+      <a href="/datenschutz.html">
+        <li class="footer__navitem"> Datenschutz</li>
+      </a>
+    </ul>
+  </div>
+</div>

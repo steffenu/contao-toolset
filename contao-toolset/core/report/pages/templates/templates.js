@@ -1,0 +1,1 @@
+/* Standart Templates checks , Analyze */

@@ -1,0 +1,39 @@
+# Configuration
+/config/parameters.yml
+/.env
+/.env.local
+.travis.yml
+
+# Composer
+/.htaccess
+/vendor/
+
+# Contao Manager
+/contao-manager/
+
+# Generated folders
+/assets/
+/files/*
+!/files/templates
+/system/*
+/system/config/
+/system/config/localconfig.php
+/system/config/tcpdf.php
+/var/
+/web/
+/public/
+
+#tpl
+!/files/tpl
+
+# Contao Toolset
+node_modules
+contao-toolset
+gulpfile.js
+package.json
+package-lock.json
+app
+files.old
+
+#vscode
+/.vscode

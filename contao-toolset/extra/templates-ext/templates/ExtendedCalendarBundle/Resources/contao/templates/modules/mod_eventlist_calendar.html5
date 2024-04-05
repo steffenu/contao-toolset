@@ -1,0 +1,156 @@
+<?php
+$GLOBALS['TL_CSS']['slickslider'] = 'web/bundles/imagemanager/slick/slick.css';
+$GLOBALS['TL_JAVASCRIPT']['slickslider'] = 'web/bundles/imagemanager/slick/slick.min.js';
+
+#dd($this);
+?>
+
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+<?php
+//    dd($this);
+    global $objPage;
+    $lang = $objPage->language;
+    $arrMonth = [
+        '1' => [
+            'de' => 'Jan',
+            'en' => 'Jan'
+        ],
+        '2' => [
+            'de' => 'Feb',
+            'en' => 'Feb'
+        ],
+        '3' => [
+            'de' => 'Mär',
+            'en' => 'Mar'
+        ],
+        '4' => [
+            'de' => 'Apr',
+            'en' => 'Apr'
+        ],
+        '5' => [
+            'de' => 'Mai',
+            'en' => 'May'
+        ],
+        '6' => [
+            'de' => 'Jun',
+            'en' => 'Jun'
+        ],
+        '7' => [
+            'de' => 'Jul',
+            'en' => 'Jul'
+        ],
+        '8' => [
+            'de' => 'Aug',
+            'en' => 'Aug'
+        ],
+        '9' => [
+            'de' => 'Sep',
+            'en' => 'Sep'
+        ],
+       '10' => [
+           'de' => 'Okt',
+           'en' => 'Oct'
+       ],
+       '11' => [
+           'de' => 'Nov',
+           'en' => 'Nov'
+       ],
+       '12' => [
+           'de' => 'Dez',
+           'en' => 'Dec'
+       ]
+    ];
+    //Wochen im Filter
+    $arrTmpFilterItems = $this->filterItems;
+#    $arrFilterItems = $this->filterItems;  //Wochen mit Events
+    $arrFilterItems = [];
+    $firstWeekItem = strtotime(array_shift($arrTmpFilterItems)) + (12 * 3600);  //GMT <> DST Puffer
+    $lastWeekItem = strtotime(array_pop($arrTmpFilterItems));
+    $weekDiff = intval(round(($lastWeekItem - $firstWeekItem) / 604800));
+    for($i = 0; $i <= $weekDiff; $i++) {
+        $date = $firstWeekItem + ($i * 604800);
+        $date_after = $firstWeekItem + (($i + 1) * 604800);
+        $year = date('Y', $date);
+        $year_day = date('z', $date);
+        $week = date('W', $date);
+        $year_week = $year . 'W' . $week;
+        $arrFilterItems[] = $year_week;
+    }
+#    dd($arrFilterItems);
+    $arrTimeStampWeek = [];
+    foreach ($arrFilterItems AS $filterItem) {
+        //$filterItem yyyy-mm
+        $intStart = strtotime($filterItem);
+        $intEnd = strtotime(date('Y-m-d', $intStart) . ' + 1 week - 1 second');
+#        dd($intStart, $intEnd);
+        $kw = date('W', $intStart);
+        $arrTimeStampWeek[] = [
+            'year-kw' => strtolower($filterItem),
+            'kw' => $kw,
+            'start' => $intStart,
+            'end' => $intEnd
+        ];
+    }
+#    dd($arrTimeStampWeek);
+?>
+    <?php if(true): ?>
+    <div id="eventfilter">
+        <div class="current_week active<?= $this->minifyCategoryFilter && $this->selectedCategory ? ' prefiltered' : '' ?>">
+            <span class="hidden-xs hidden-sm">{{iflng::de}}Aktuelle Woche{{iflng::en}}Current week{{iflng}}</span>
+            <span class="visible-xs visible-sm">{{iflng::de}}heute{{iflng::en}}today{{iflng}}</span>
+        </div>
+        <div class="week_filter">
+            <div class="customSelect-selected" data-start="<?= $arrTimeStampWeek[0]['start'] ?>" data-end="<?= $arrTimeStampWeek[0]['end'] ?>">
+                <span class="weekrange"><?= date('d', $arrTimeStampWeek[0]['start']) . '. ' . $arrMonth[date('n', $arrTimeStampWeek[0]['start'])][$lang] . ' ' . date('y', $arrTimeStampWeek[0]['start']) ?> - <?= date('d', $arrTimeStampWeek[0]['end']) . '. ' . $arrMonth[date('n', $arrTimeStampWeek[0]['end'])][$lang] . ' ' . date('y', $arrTimeStampWeek[0]['end']) ?></span>
+                <span class="weeknumber">{{iflng::de}}K{{iflng::en}}C{{iflng}}W <?= $arrTimeStampWeek[0]['kw'] ?></span>
+            </div>
+            <ul>
+                <?php foreach($arrTimeStampWeek AS $index => $week): ?>
+                    <li class="week-<?= $week['kw'] ?><?= $index == 0 ? ' active' : ''  ?>" data-index="<?= $index ?>" data-start="<?= $week['start'] ?>" data-end="<?= $week['end'] ?>">
+                        <span class="weekrange"><?= date('d', $week['start']) . '. ' . $arrMonth[date('n', $week['start'])][$lang] . ' ' . date('y', $week['start']) ?> - <?= date('d', $week['end']) . '. ' . $arrMonth[date('n', $week['end'])][$lang] . ' ' . date('y', $week['end']) ?></span>
+                        <span class="weeknumber">{{iflng::de}}K{{iflng::en}}C{{iflng}}W <?= $week['kw'] ?></span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php if($this->eventCategories): ?>
+        <div class="category_filter<?= $this->minifyCategoryFilter ? ' minified' : '' ?>">
+            <form action="/{{link_url::<?= $objPage->id ?>}}">
+                <input type="hidden" name="start" value="<?= $arrTimeStampWeek[0]['start'] ?>">
+                <input type="hidden" name="end" value="<?= $arrTimeStampWeek[0]['end'] ?>">
+                <input type="hidden" name="date" value="" class="datepicker">
+                <select name="category">
+                    <option value="">{{iflng::de}}Alle Kategorien{{iflng::en}}All Categories{{iflng}}</option>
+                    <?php foreach ($this->eventCategories AS $item): ?>
+                        <option value="<?= $item->id ?>"<?= ($this->minifyCategoryFilter && $this->selectedCategory == $item->id) ? ' selected' : '' ?>><?= $item->title ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
+        </div>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
+    <div id="eventlist-container" class="ajax-content">
+    <?php if($this->ajaxRequest): ?>
+        <div id="ajax-request">
+    <?php endif; ?>
+
+<?= $this->events ?>
+
+    <?php if($this->ajaxRequest): ?>
+        </div>
+    <?php endif; ?>
+    </div>
+
+    <div id="event-overlay-container">
+        <div class="inner">
+            <div class="event-content-container">
+                <span class="close-event-overlay"></span>
+            </div>
+        </div>
+    </div>
+
+<?php $this->endblock(); ?>

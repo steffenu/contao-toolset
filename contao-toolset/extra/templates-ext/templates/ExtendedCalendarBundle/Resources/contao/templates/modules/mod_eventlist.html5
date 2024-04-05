@@ -1,0 +1,150 @@
+<?php 
+
+$GLOBALS['TL_CSS']['extendedcalendar_css'] = 'web/bundles/extendedcalendar/css/extendedcalendar.css'; 
+
+
+// Splide Slider 
+$GLOBALS['TL_JAVASCRIPT']['splideslider'] = 'files/tpl/script/splideslider/splide.min.js';
+$GLOBALS['TL_CSS']['splideslider_css'] = '/files/tpl/script/splideslider/splide.min.css';
+
+/* $GLOBALS['TL_JAVASCRIPT']['jquery'] = 'files/tpl/script/jquery/jquery.js';
+$GLOBALS['TL_JAVASCRIPT']['slickslider'] = 'web/bundles/imagemanager/slick/slick.min.js';
+$GLOBALS['TL_JAVASCRIPT']['lightbox_js'] = 'files/tpl/script/lightbox/lupcom-lightbox.js';
+$GLOBALS['TL_CSS']['lightbox_css'] = 'web/bundles/imagemanager/lupcomLightbox/lupcom-lightbox-scss.scss';
+$GLOBALS['TL_CSS']['slickslider'] = 'web/bundles/imagemanager/slick/slick.css'; */
+?>
+
+
+
+<section class="eventsection">
+
+  <div class="eventsection__headline">
+    <<?= $this->hl ?>>NEXT EVENTS</<?= $this->hl ?>>
+  </div>
+
+  <div class="events-wrapper container">
+
+    <section id="events-slider" class="splide" aria-label="Splide Basic HTML Example">
+      <div class="splide__track">
+        <ul class="splide__list">
+        <?php foreach ($this->events AS $index => $event): ?>
+          <?php if($event->pid == 1 && $index <= 2): ?> <!-- pid 1 = veranstaltungen , pid 2 = spieltag , pid 4= Trainging -->
+          <li class="splide__slide imageslider__item">
+            <div class="event">
+              <div class="event__title">
+                <?= $this->title ?>
+              </div>
+
+              <div class="event__image">
+                <?php if ($event->lp_image): ?>
+                <?php $img = Contao\FilesModel::findById($event->lp_image)->path; ?>
+                {{picture::<?= $img  ?>?size=2}}
+                <?php endif; ?>
+              </div>
+
+              <?php
+              if ($event->startTime) {
+                  $start_time = new \Moment\Moment($event->startTime);
+                  $start_time_formatted = $start_time->format("H:i");
+
+              } 
+              if ($event->endTime) {
+                  $end_time = new \Moment\Moment($event->endTime);
+                  $end_time_formatted = $end_time->format("H:i");
+              } 
+              ?>
+
+              <div class="event__teaserblock">
+                <div class="event__marker"></div>
+                <div class="event__teaser">
+                  <div class="event__startend">
+                    <?php if($event->startTime): ?>
+                    <p class="event__startTime"><?= $start_time_formatted ?></p>
+                    <p class="event__startTime">&nbsp - &nbsp</p>
+                    <p class="event__endTime"><?= $end_time_formatted ?></p>
+                    <p class="event__startTime">&nbsp Uhr</p>
+                    <?php endif ?>
+                  </div>
+
+                  <p class="event__teasertitle">Spieltag</p>
+                  <div class="event__teasertext">
+                    <?= $event->teaser ?>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </li>
+          <?php endif ?>
+          <?php endforeach ?>
+        </ul>
+      </div>
+      <div class="splide__arrows">
+        <button class="splide__arrow splide__arrow--prev">
+          <img src="files/tpl/Assets/VECTOR/grey_arrow.svg" alt="">
+        </button>
+        <div class="splide__arrow--overlay"></div>
+        <button class="splide__arrow splide__arrow--next">
+          <img src="files/tpl/Assets/VECTOR/grey_arrow.svg" alt="">
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <div class="eventsection__wrapper">
+    <div class="eventsection__icon">
+      {{image::files/tpl/Assets/VECTOR/icon_events.svg?class=eventsection__icon}}
+    </div>
+    <a href="" class="eventsection__link">ALLE EVENTS</a>
+
+  </div>
+
+
+</section>
+
+<?php 
+//dump($this->events);
+?>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+
+
+    var splide = new Splide('#events-slider', {
+      destroy: true,
+      type: 'loop',
+      autoplay: 'pause',
+      interval: 3000,
+      speed: 2000,
+      gap: '10px',
+      perPage: 1,
+
+      cover: true,
+      pagination: false,
+      arrows: false,
+      focus: 'center',
+      autoWidth: false,
+      fixedWidth: '418px',
+
+
+
+      mediaQuery: 'max',
+      breakpoints: {
+        768: {
+          fixedWidth: '100%',
+          destroy: false,
+          pagination: true,
+          arrows: true,
+          perPage: 1,
+        },
+      }
+    });
+
+
+    splide.mount();
+
+  })
+</script>

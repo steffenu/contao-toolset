@@ -1,0 +1,60 @@
+<?php
+
+#dd($this);
+
+global $objPage;
+$lang = $objPage->language;
+
+$arrWeekdays = [
+    0 => [
+        'de' => 'So',
+        'en' => 'Sun'
+    ],
+    1 => [
+        'de' => 'Mo',
+        'en' => 'Mon'
+    ],
+    2 => [
+        'de' => 'Di',
+        'en' => 'Tue'
+    ],
+    3 => [
+        'de' => 'Mi',
+        'en' => 'Wed'
+    ],
+    4 => [
+        'de' => 'Do',
+        'en' => 'Thu'
+    ],
+    5 => [
+        'de' => 'Fr',
+        'en' => 'Fri'
+    ],
+    6 => [
+        'de' => 'Sa',
+        'en' => 'Sat'
+    ]
+];
+
+?>
+
+    <div class="event_calendar_week">
+        <div class="event_calendar_week_navi slide-0" style="--leftFactor: 0">
+            <?php for ($i = 1; $i <= count($arrWeekdays); $i++):
+            $weekday = $i;
+            if($i == 7) {
+                $weekday = 0;
+            }
+            ?>
+                <div class="week_navi_date day-<?= $i - 1 ?>">
+                    <span class="day_name"><?= $arrWeekdays[$weekday][$lang] ?></span>
+                    <span class="day_date"><?= date('d', $this->weekstart + (($i - 1) * 86400)) ?></span>
+                </div>
+            <?php endfor; ?>
+        </div>
+        <div class="event_calendar_days">
+
+            <?= $this->week ?>
+
+        </div>
+    </div>

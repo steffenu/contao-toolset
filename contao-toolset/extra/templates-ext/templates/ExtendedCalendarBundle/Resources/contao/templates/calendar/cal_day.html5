@@ -1,0 +1,75 @@
+<?php
+
+#dd($this);
+
+global $objPage;
+$lang = $objPage->language;
+
+$arrWeekDayHeaderEvents = $this->header;
+$arrWeekDayContentEvents = $this->content;
+
+$arrWeekdays = [
+    0 => [
+        'de' => 'So',
+        'en' => 'Sun'
+    ],
+    1 => [
+        'de' => 'Mo',
+        'en' => 'Mon'
+    ],
+    2 => [
+        'de' => 'Di',
+        'en' => 'Tue'
+    ],
+    3 => [
+        'de' => 'Mi',
+        'en' => 'Wed'
+    ],
+    4 => [
+        'de' => 'Do',
+        'en' => 'Thu'
+    ],
+    5 => [
+        'de' => 'Fr',
+        'en' => 'Fri'
+    ],
+    6 => [
+        'de' => 'Sa',
+        'en' => 'Sat'
+    ]
+];
+?>
+
+<?php for ($i = 1; $i <= count($arrWeekdays); $i++):
+    $weekday = $i;
+    if($i == 7) {
+        $weekday = 0;
+    }
+?>
+
+<div class="event_calendar_day<?= date('dmy', $this->weekstart + (($i - 1) * 86400)) == date('dmy', time()) ? ' current_day' : '' ?>">
+    <div class="event_calendar_day_header event_count-<?= count($arrWeekDayHeaderEvents[$weekday]) ?><?= (!count($arrWeekDayHeaderEvents[$weekday]) && !count($arrWeekDayContentEvents[$weekday])) ? ' no-events' : '' ?>">
+        <div class="event_date">
+            <span class="day_name"><?= $arrWeekdays[$weekday][$lang] ?></span>
+            <span class="day_date"><?= date('d.m.y', $this->weekstart + (($i - 1) * 86400)) ?></span>
+        </div>
+
+        <?php if(is_array($arrWeekDayHeaderEvents[$weekday])): ?>
+            <?= implode($arrWeekDayHeaderEvents[$weekday]) ?>
+        <?php endif; ?>
+
+        <?php if(!count($arrWeekDayHeaderEvents[$weekday]) && !count($arrWeekDayContentEvents[$weekday])): ?>
+            <p class="empty"><?= FrontendTemplate::replaceInsertTags('{{iflng::de}}Keine Events an diesem Tag{{iflng::en}}No events on this day{{iflng}}') ?></p>
+        <?php endif; ?>
+
+    </div>
+    <div class="event_calendar_day_content event_count-<?= count($arrWeekDayContentEvents[$weekday]) ?>">
+
+        <?php if(is_array($arrWeekDayContentEvents[$weekday])): ?>
+            <?= implode($arrWeekDayContentEvents[$weekday]) ?>
+        <?php endif; ?>
+
+    </div>
+</div>
+
+<?php endfor; ?>

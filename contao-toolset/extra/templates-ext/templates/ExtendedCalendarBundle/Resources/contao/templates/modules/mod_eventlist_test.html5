@@ -1,0 +1,18 @@
+<?php $GLOBALS['TL_CSS']['events_css'] = 'public/bundles/extendedcalendar/css/events_list.css'; ?>
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+<div class="events-wrapper">
+  <?= $this->events ?>
+</div>
+<!-- <div class="pagination-wrapper">
+  <?= $this->pagination ?>
+</div> -->
+
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet illo possimus, maxime, ratione animi quae qui recusandae sint commodi in aperiam consequuntur ipsa earum facere ipsum magni praesentium repudiandae nihil ex. Rerum voluptatem culpa, id consequatur modi, illo tempore consectetur adipisci rem sapiente incidunt facilis inventore unde magni tempora est amet aperiam. Cupiditate, ut necessitatibus blanditiis placeat officia cumque tempore omnis beatae modi itaque excepturi nemo totam quibusdam vel! Expedita quaerat minima, consectetur fugit unde temporibus fuga dolor minus qui laudantium nisi animi quasi ut dolorem nostrum incidunt nesciunt quam blanditiis. Laudantium ab optio natus neque, debitis hic? Non, nihil?</p>
+
+<?php $this->endblock(); ?>
+
+

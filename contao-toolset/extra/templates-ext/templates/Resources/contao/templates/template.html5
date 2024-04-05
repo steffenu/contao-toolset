@@ -1,0 +1,11 @@
+<?php if ($this->elementID): ?>
+<div id="<?= $this->elementID ?>"></div>
+<?php endif ?>
+
+<section class="##NAME_TEMPLATE##section <?= $this->class ?> ">
+  <div class="##NAME_TEMPLATE##">
+    <div class="##NAME_TEMPLATE##__container container">
+  
+    </div>
+  </div>
+</section>

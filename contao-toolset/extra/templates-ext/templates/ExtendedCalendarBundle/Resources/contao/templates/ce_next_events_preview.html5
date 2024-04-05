@@ -1,0 +1,121 @@
+<?php
+$GLOBALS['TL_CSS']['ce_next_events_preview_css'] = 'public/bundles/extendedcalendar/css/ce_next_events_preview.css';
+?>
+<?php
+\Moment\Moment::setLocale('de_DE');
+\Moment\Moment::setDefaultTimezone('Europe/Berlin');
+
+
+$countEvents = count($this->events);
+$columnsClass = "col-1";
+
+switch ($countEvents) {
+    case 2:
+        $columnsClass = "col-2";
+        break;
+    case 3:
+        $columnsClass = "col-3";
+        break;
+    default:
+        break;
+}
+
+?>
+<div class="ce_next_events_preview">
+    <div class="event-teasers <?= $columnsClass ?>">
+        <?php foreach ($this->events as $event) : ?>
+            <?php
+            //get correct dateformat
+            $startDay = $startMonth = $startWeekDay = $endDay =  $endMonth = null;
+            $showEndDate = false;
+
+            $startDate = new \Moment\Moment($event->startDate);
+
+            $startDay = $startDate->format('d');
+            $startMonth = $startDate->format('M');
+            $startWeekDay = $startDate->format('l');
+
+            if ($event->endDate != null && $event->startDate != $event->endDate) {
+                $endDate = new \Moment\Moment($event->endDate);
+                $endDay = $endDate->format('d');
+                $endMonth = $endDate->format('M');
+                $showEndDate = true;
+            }
+
+
+            $formattedStartTime = null;
+            $formattedEndTime = null;
+            if ($event->addTime != null && $event->startTime) {
+                $startTime = new \Moment\Moment($event->startTime);
+                $formattedStartTime = $startTime->format("H:i");
+                if ($event->endTime != null && $event->endTime != $event->startTime) {
+                    $endTime = new \Moment\Moment($event->endTime);
+                    $formattedEndTime = $endTime->format("H:i");
+                }
+            }
+
+            //generate detailseite link
+            $listUrl = Contao\Controller::replaceInsertTags('{{link_url::' . $this->jumpTo . '}}');
+            $detailsUrl = str_replace(".html", "\\details\\" . $event->alias . ".html", $listUrl);
+            ?>
+
+            <div class="teaser">
+                <div class="date-wrapper">
+                    <div class="date start">
+                        <span class="big"><?= $startDay ?></span>
+                        <span class="small"><?= $startMonth ?></span>
+                    </div>
+                    <?php if ($showEndDate == true) : ?>
+                        <p class="h4"> - </p>
+                        <div class="date end">
+                            <span class="big"><?= $endDay ?></span>
+                            <span class="small"><?= $endMonth ?></span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <?php if ($columnsClass == "col-1") : ?>
+                    <div class="wrapper-col-1">
+                    <?php endif; ?>
+
+                    <div <?php if (!$event->teaser) : ?>class="info" <?php endif; ?>>
+                        <h4><?= $event->title ?></h4>
+
+                        <?php if ($formattedStartTime) : ?>
+                            <p class="time"><strong><?= $formattedStartTime ?> <?php if ($formattedEndTime) : ?> - <?= $formattedEndTime ?><?php endif; ?> Uhr</strong></p>
+                        <?php endif; ?>
+
+                        <div class="ce_text block">
+                            <?= $event->teaser ?>
+                        </div>
+                    </div>
+
+                    <?php if ($event->source == "default" && $event->hasDetailsite) : ?>
+                        <p class="more"><a href="<?= $detailsUrl ?>" <?= $event->target ?>>Mehr lesen<span class="invisible"> <?= $event->link ?></span></a></p>
+                    <?php elseif ($event->source == "internal") : ?>
+                        <?php $internUrl = Contao\Controller::replaceInsertTags('{{link_url::' . $event->jumpTo . '}}'); ?>
+                        <p class="more"><a href="<?= $internUrl ?>" <?= $event->target ?>>Mehr lesen<span class="invisible"> <?= $event->link ?></span></a></p>
+
+                    <?php elseif ($event->source == "external") : ?>
+                        <p class="more"><a href="<?= $event->url ?>" <?php if ($event->target) : ?> target="_blank" <?php endif; ?>>Mehr lesen<span class="invisible"> <?= $event->url ?></span></a></p>
+                    <?php endif; ?>
+
+                    <?php if ($columnsClass == "col-1") : ?>
+                    </div>
+                <?php endif; ?>
+
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <?php if ($this->events) : ?>
+        <div>
+            <a href="{{link_url::<?= $this->jumpTo ?>}}">&nbsp;-&nbsp;Alle Events&nbsp;-&nbsp;</a>
+        </div>
+    <?php else : ?>
+        <div>
+            <p>Aktuell sind keine Termine vorhanden.</p>
+        </div>
+    <?php endif; ?>
+
+</div>

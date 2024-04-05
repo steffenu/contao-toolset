@@ -1,0 +1,19 @@
+<?php if ($this->elementID): ?>
+<div id="<?= $this->elementID ?>"></div>
+<?php endif ?>
+
+<section style="background:<?= $this->background_select ?>;" class="textabschnittsection sectionpadding-standart <?= $this->class ?>">
+  <div class="textabschnitt__container container">
+    <div class="textabschnitt__textwrapper">
+    <div style="<?= $this->text_align ?>;" class="textabschnitt__title"><<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>></div>
+      <div class="textabschnitt__maintext"><?= $this->rte1 ?></div>
+    </div>
+  </div>
+</section>
+
+
+<?php 
+//dump($this);
+//dump($this->boxleft);
+?>
+

@@ -1,0 +1,65 @@
+<?php
+$GLOBALS['TL_CSS']['extendedcalendar_css'] = 'web/bundles/extendedcalendar/css/extendedcalendar.css';
+?>
+
+<?php if ($this->elementID): ?>
+<div id="<?= $this->elementID ?>"></div>
+<?php endif ?>
+
+<li class="splide__slide imageslider__item">
+<div class="event <?= $this->classList ?>">
+    <div class="event__title">
+        <?= $this->title ?>
+    </div>
+
+    <div class="event__image">
+        <?php if ($this->lp_image): ?>
+        <?php $img = Contao\FilesModel::findById($this->lp_image)->path; ?>
+        {{picture::<?= $img  ?>?size=2}}
+        <?php endif; ?>
+    </div>
+
+    <?php
+    if ($this->startTime) {
+        $start_time = new \Moment\Moment($this->startTime);
+        $start_time_formatted = $start_time->format("H:i");
+
+    } 
+    if ($this->endTime) {
+        $end_time = new \Moment\Moment($this->endTime);
+        $end_time_formatted = $end_time->format("H:i");
+    } 
+    ?>
+
+    <div class="event__teaserblock">
+        <div class="event__marker"></div>
+        <div class="event__teaser">
+            <div class="event__startend">
+                <?php if($this->startTime): ?>
+                <p class="event__startTime"><?= $start_time_formatted ?></p>
+                <p class="event__startTime">&nbsp - &nbsp</p>
+                <p class="event__endTime"><?= $end_time_formatted ?></p>
+                <p class="event__startTime">&nbsp Uhr</p>
+                <?php endif ?>
+            </div>
+
+            <p class="event__teasertitle">Spieltag</p>
+            <div class="event__teasertext">
+                <?= $this->teaser ?>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+</li>
+
+
+<?php
+
+// This template is used as an event list template by default, so we only add
+// JSON-LD data in case this is an event without a reader
+if (!$this->hasReader) {
+    $this->addSchemaOrg($this->getSchemaOrgData());
+}

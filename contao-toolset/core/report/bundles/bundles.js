@@ -1,0 +1,1 @@
+/* info to all custom bundles that are registered in contaomanager plugin */
